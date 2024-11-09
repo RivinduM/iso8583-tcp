@@ -1,0 +1,19 @@
+[package]
+org = "rivindumadushan"
+name = "iso8583_tcp_inbound"
+version = "0.1.0"
+distribution = "2201.10.1"
+
+[build-options]
+observabilityIncluded = true
+
+[[dependency]]
+org = "ballerinax"
+name = "financial.iso8583"
+version = "0.9.7"
+repository = "local"
+
+[[dependency]]
+org = "ballerinax"
+name = "financial.iso20022"
+version = "1.0.0"
