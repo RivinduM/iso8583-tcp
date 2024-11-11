@@ -8,8 +8,8 @@ versionNameString = ""
 mtiLength = 4
 
 [isoLibraryConfig]
-fieldDefFilePath = "/Users/rivindumadushan/CodeBases/PTJalinBallerina/iso8583_tcp_inbound/resources/jposdefv87.xml"
-fieldNamesFilePath = "/Users/rivindumadushan/CodeBases/PTJalinBallerina/iso8583_tcp_inbound/resources/jpos.csv"
+fieldDefFilePath = "resources/jposdefv87.xml"
+fieldNamesFilePath = "resources/jpos.csv"
 
 [backendServiceConfig]
 host = "localhost"

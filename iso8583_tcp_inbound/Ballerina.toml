@@ -10,8 +10,7 @@ observabilityIncluded = true
 [[dependency]]
 org = "ballerinax"
 name = "financial.iso8583"
-version = "0.9.7"
-repository = "local"
+version = "0.8.0"
 
 [[dependency]]
 org = "ballerinax"
