@@ -39,7 +39,7 @@ function transformMTI0200toMTI0210(MTI_0200 mti0200, string responseCode) return
     CardAcceptorTerminalID: mti0200.CardAcceptorTerminalID,
     ResponseCode: responseCode,
     PrimaryAccountNumber: mti0200.PrimaryAccountNumber,
-    AmountTransaction: mti0200.AmountTransaction,
+    AmountTransaction: mti0200.AmountTransaction ?: "0",
     MerchantType: mti0200.MerchantType,
     PointOfServiceEntryMode: mti0200.PointOfServiceEntryMode,
     PointOfServiceConditionCode: mti0200.PointOfServiceConditionCode,
@@ -79,13 +79,14 @@ function transformMTI0100toMTI0110(MTI_0100 mti0100, string responseCode) return
     AccountIdentification1: mti0100.AccountIdentification1,
     AccountIdentification2: mti0100.AccountIdentification2,
     MessageAuthenticationCode: mti0100.MessageAuthenticationCode,
-    PointOfServiceCaptureCode: mti0100.PointOfServiceCaptureCode
+    PointOfServiceCaptureCode: mti0100.PointOfServiceCaptureCode,
+    AdditionalAmounts: mti0100.ProcessingCode.startsWith("31") ? "1500" : ""
 };
 
 function buildMTI0210error(MTI_0200 mti0200, string responseCode) returns MTI_0210 => {
     PrimaryAccountNumber: mti0200.PrimaryAccountNumber,
     ProcessingCode: mti0200.ProcessingCode,
-    AmountTransaction: mti0200.AmountTransaction,
+    AmountTransaction: mti0200.AmountTransaction ?: "0",
     TransmissionDateTime: mti0200.TransmissionDateTime,
     SystemTraceAuditNumber: mti0200.SystemTraceAuditNumber,
     LocalTransactionTime: mti0200.LocalTransactionTime,
@@ -142,11 +143,11 @@ function transformmti200toPacs008(MTI_0200 mti0200) returns iso:Pacs008Document|
                 InstdAmt: {
                     ActiveOrHistoricCurrencyAndAmount_SimpleType: {
                         Ccy: mti0200.CurrencyCodeTransaction,
-                        ActiveOrHistoricCurrencyAndAmount_SimpleType: check decimal0:fromString(mti0200.AmountTransaction)
+                        ActiveOrHistoricCurrencyAndAmount_SimpleType: check decimal0:fromString(mti0200.AmountTransaction ?: "0")
                     }
                 },
                 IntrBkSttlmAmt: {ActiveCurrencyAndAmount_SimpleType: {
-                    ActiveCurrencyAndAmount_SimpleType: check decimal0:fromString(mti0200.AmountTransaction), 
+                    ActiveCurrencyAndAmount_SimpleType: check decimal0:fromString(mti0200.AmountTransaction ?: "0"), 
                     Ccy: mti0200.CurrencyCodeTransaction}
                 },
                 PmtId: {

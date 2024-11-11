@@ -16,7 +16,7 @@
 
 import ballerina/constraint;
 
-public type MTI_0800 record {|
+public type MTI_0800 record {
     string MTI = "0800";
 
     @constraint:String {
@@ -46,7 +46,7 @@ public type MTI_0800 record {|
     string LocalTransactionTime?;
     string ProcessingCode?;
     string CardAcceptorTerminalID?;
-|};
+};
 
 public type MTI_0810 record {|
     string MTI = "0810";
@@ -79,7 +79,10 @@ public type MTI_0810 record {|
     string LocalTransactionTime?;
     string ProcessingCode?;
     string CardAcceptorTerminalID?;
-    string ResponseCode;
+    string ResponseCode?;
+    string PointOfServiceConditionCode?;
+    string PointOfServiceCaptureCode?;
+    string AmountTransactionFee?;
 |};
 
 
@@ -105,7 +108,7 @@ public type MTI_0200 record {|
             message: "Only numeric values allowed for AmountTransaction"
         }
     }
-    string AmountTransaction;
+    string AmountTransaction?;
     @constraint:String {
          pattern: {
             value: re `^\d+`,
@@ -231,6 +234,7 @@ public type MTI_0200 record {|
     string ExpirationDate?;
     string PointOfServiceCaptureCode?;
     string CardSequenceNumber?;
+    string ForwardingInstitutionIdentificationCode?;
 |};
 
 public type MTI_0210 record {|
@@ -525,6 +529,7 @@ public type MTI_0100 record {|
     string CurrencyCodeCardholderBilling?;
     string PersonalIdentificationNumberData?;
     string CardSequenceNumber?;
+    string ForwardingInstitutionIdentificationCode?;
 |};
 
 public type MTI_0110 record {|
@@ -669,6 +674,7 @@ public type MTI_0110 record {|
     string PersonalIdentificationNumberData?;
     string CardSequenceNumber?;
     string ResponseCode;
+    string AdditionalAmounts?;
 |};
 
 public type InboundConfig record {|

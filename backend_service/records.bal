@@ -38,7 +38,7 @@ public type MTI_0200 record {|
             message: "Only numeric values allowed for AmountTransaction"
         }
     }
-    string AmountTransaction;
+    string AmountTransaction?;
     @constraint:String {
          pattern: {
             value: re `^\d+`,
@@ -164,6 +164,7 @@ public type MTI_0200 record {|
     string ExpirationDate?;
     string PointOfServiceCaptureCode?;
     string CardSequenceNumber?;
+    string ForwardingInstitutionIdentificationCode?;
 |};
 
 public type MTI_0100 record {|
@@ -307,4 +308,5 @@ public type MTI_0100 record {|
     string CurrencyCodeCardholderBilling?;
     string PersonalIdentificationNumberData?;
     string CardSequenceNumber?;
+    string ForwardingInstitutionIdentificationCode?;
 |};

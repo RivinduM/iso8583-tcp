@@ -31,6 +31,8 @@ service /'transaction on new http:Listener(9001) {
                 ActiveCurrencyAndAmount_SimpleType.ActiveCurrencyAndAmount_SimpleType;
             if amount > 0d {
                 return http:ACCEPTED;
+            } else if isopacs008.FIToFICstmrCdtTrf.CdtTrfTxInf[0].PmtTpInf?.LclInstrm?.Prtry.toString().startsWith("31") {
+                return http:ACCEPTED;
             } else {
                 return http:BAD_REQUEST;
             }
@@ -46,6 +48,8 @@ service /'transaction on new http:Listener(9001) {
         if payload.MTI === "0100" {
             int|error amount = int:fromString(payload.AmountTransaction);
             if amount is int && amount > 0 {
+                return http:ACCEPTED;
+            } else if payload.ProcessingCode.startsWith("00") {
                 return http:ACCEPTED;
             } else {
                 return http:BAD_REQUEST;
